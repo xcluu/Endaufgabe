@@ -86,7 +86,7 @@ namespace pokimon {
 
         }
 
-        change_mood(): void {
+        update_mood(): void {
             let currentTime: number = Date.now() / 1000 / 60;
 
             if (this.stamina >= 60 &&
@@ -102,6 +102,20 @@ namespace pokimon {
 
             console.log(currentTime - this.last_clean);
             console.log(this.mood);
+        }
+
+        update_stamina(): void {
+            this.stamina--;
+        }
+
+        update_experience(): void {
+
+            this.exp += 10;
+
+            if(this.exp >= this.max_exp) {
+                this.lv_up();
+            }
+
         }
     }
 }

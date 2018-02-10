@@ -37,7 +37,7 @@ var pokimon;
             if (this.stamina >= 100)
                 this.stamina = 100;
         };
-        Pokimon.prototype.change_mood = function () {
+        Pokimon.prototype.update_mood = function () {
             var currentTime = Date.now() / 1000 / 60;
             if (this.stamina >= 60 &&
                 currentTime - this.last_clean <= 1 &&
@@ -51,6 +51,15 @@ var pokimon;
                 this.mood = "sad";
             console.log(currentTime - this.last_clean);
             console.log(this.mood);
+        };
+        Pokimon.prototype.update_stamina = function () {
+            this.stamina--;
+        };
+        Pokimon.prototype.update_experience = function () {
+            this.exp += 10;
+            if (this.exp >= this.max_exp) {
+                this.lv_up();
+            }
         };
         return Pokimon;
     }());
