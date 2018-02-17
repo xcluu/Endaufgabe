@@ -6,12 +6,12 @@ namespace pokimon {
 
         mood: string;
         stamina: number;
-        last_pet: number;
-        last_clean: number;
+        lastPet: number;
+        lastClean: number;
 
         lv: number;
         exp: number;
-        max_exp: number;
+        maxExp: number;
     }
 
 
@@ -21,29 +21,29 @@ namespace pokimon {
 
         mood: string;
         stamina: number;
-        last_pet: number;
-        last_clean: number;
+        lastPet: number;
+        lastClean: number;
 
         lv: number;
         exp: number;
-        max_exp: number;
+        maxExp: number;
 
         constructor(name: string) {
             this.name = name;
 
             this.mood = undefined;
             this.stamina = undefined;
-            this.last_pet = undefined;
+            this.lastPet = undefined;
 
 
             this.lv = 0;
             this.exp = 0;
-            this.max_exp = 25;
+            this.maxExp = 25;
         }
 
         hatch(): void {
-            this.last_clean = Date.now() * 1000 / 60;
-            this.last_pet = Date.now() * 1000 / 60;
+            this.lastClean = Date.now() * 1000 / 60;
+            this.lastPet = Date.now() * 1000 / 60;
             this.stamina = 100;
             //change visual
         }
@@ -52,10 +52,10 @@ namespace pokimon {
         lv_up(): void {
 
             //reset current exp
-            this.exp = this.max_exp - this.exp;
+            this.exp = this.maxExp - this.exp;
 
             //raise max-exp exponentially
-            this.max_exp = this.max_exp ^ 2;
+            this.maxExp = this.maxExp ^ 2;
 
             //raise lv
             this.lv++;
@@ -65,14 +65,14 @@ namespace pokimon {
 
         pet(): void {
 
-            this.last_pet = Date.now() / 1000 / 60;
+            this.lastPet = Date.now() / 1000 / 60;
 
         }
 
         clean(): void {
 
-            this.last_clean = Date.now() / 1000 / 60;
-            console.log(this.last_clean);
+            this.lastClean = Date.now() / 1000 / 60;
+            console.log(this.lastClean);
         }
 
         feed(type: Food): void {
@@ -90,17 +90,17 @@ namespace pokimon {
             let currentTime: number = Date.now() / 1000 / 60;
 
             if (this.stamina >= 60 &&
-                currentTime - this.last_clean <= 1 &&
-                currentTime - this.last_pet <= 1)
+                currentTime - this.lastClean <= 1 &&
+                currentTime - this.lastPet <= 1)
                 this.mood = "happy";
             else this.mood = "okay";
 
             if (this.stamina <= 30 &&
-                currentTime - this.last_clean >= 2 &&
-                currentTime - this.last_pet >= 2)
+                currentTime - this.lastClean >= 2 &&
+                currentTime - this.lastPet >= 2)
                 this.mood = "sad";
 
-            console.log(currentTime - this.last_clean);
+            console.log(currentTime - this.lastClean);
             console.log(this.mood);
         }
 
@@ -112,10 +112,14 @@ namespace pokimon {
 
             this.exp += 10;
 
-            if(this.exp >= this.max_exp) {
+            if(this.exp >= this.maxExp) {
                 this.lv_up();
             }
 
+        }
+
+        getPokimon(): Pokimon {
+            return this;
         }
     }
 }

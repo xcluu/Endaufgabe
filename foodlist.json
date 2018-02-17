@@ -1,0 +1,27 @@
+{
+  "food":[
+    {
+      "name": "Pizza",
+      "calories": "100"
+    },
+    {
+      "name": "Karotte",
+      "calories": "10"
+    },
+    {
+      "name": "Hamburger",
+      "calories": "1000"
+    },
+    {
+      "name": "Kartoffel",
+      "calories": "100"
+    }
+
+
+
+
+  ]
+
+
+
+}
