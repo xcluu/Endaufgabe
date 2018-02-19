@@ -1,5 +1,6 @@
 namespace pokimon {
 
+    let img: HTMLImageElement;
 
     interface IntPokimon {
         name: string;
@@ -121,5 +122,50 @@ namespace pokimon {
         getPokimon(): Pokimon {
             return this;
         }
+
+        changeVisual(): void {
+            if (this.name == "Seemops"){
+                if (this.mood == "happy"){
+                    img = document.getElementById("happy-seemops") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+                if (this.mood == "sad"){
+                    img = document.getElementById("sad-seemops") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+                if (this.lv == 0){
+                    img = document.getElementById("egg-seemops") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+                else {
+                    img = document.getElementById("seemops") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+
+            }
+
+            if (this.name == "Flegmon"){
+                if (this.mood == "happy"){
+                    img = document.getElementById("happy-slowpoke") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+                if (this.mood == "sad"){
+                    img = document.getElementById("sad-slowpoke") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+                if (this.lv == 0){
+                    img = document.getElementById("egg-slowpoke") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+                else {
+                    img = document.getElementById("slowpoke") as HTMLImageElement;
+                    crc.drawImage(img,40,50,650,400);
+                }
+
+            }
+
+        }
+
+
     }
 }

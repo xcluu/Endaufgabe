@@ -1,5 +1,6 @@
 var pokimon;
 (function (pokimon) {
+    var img;
     var Pokimon = /** @class */ (function () {
         function Pokimon(name) {
             this.name = name;
@@ -63,6 +64,44 @@ var pokimon;
         };
         Pokimon.prototype.getPokimon = function () {
             return this;
+        };
+        Pokimon.prototype.changeVisual = function () {
+            if (this.name == "Seemops") {
+                if (this.mood == "happy") {
+                    img = document.getElementById("happy-seemops");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+                if (this.mood == "sad") {
+                    img = document.getElementById("sad-seemops");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+                if (this.lv == 0) {
+                    img = document.getElementById("egg-seemops");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+                else {
+                    img = document.getElementById("seemops");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+            }
+            if (this.name == "Flegmon") {
+                if (this.mood == "happy") {
+                    img = document.getElementById("happy-slowpoke");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+                if (this.mood == "sad") {
+                    img = document.getElementById("sad-slowpoke");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+                if (this.lv == 0) {
+                    img = document.getElementById("egg-slowpoke");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+                else {
+                    img = document.getElementById("slowpoke");
+                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
+                }
+            }
         };
         return Pokimon;
     }());

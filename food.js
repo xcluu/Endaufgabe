@@ -5,11 +5,9 @@ var pokimon;
             this.name = name;
             this.calories = calories;
         }
-        //pass calories
         Food.prototype.getCalories = function () {
             return this.calories;
         };
-        //pass name
         Food.prototype.getName = function () {
             return this.name;
         };

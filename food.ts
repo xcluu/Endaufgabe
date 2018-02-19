@@ -16,12 +16,10 @@ namespace pokimon {
             this.calories = calories;
         }
 
-        //pass calories
         getCalories(): number {
             return this.calories;
         }
 
-        //pass name
         getName(): string {
             return this.name;
         }

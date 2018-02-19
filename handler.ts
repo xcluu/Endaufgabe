@@ -13,7 +13,7 @@ namespace pokimon {
         }
 
         login(name: string, pw: string): void {
-            this.player = this.storage.getPlayer(name, pw);
+            this.player = this.stoirage.getPlayer(name, pw);
             if (this.player != null){
                 console.log("erfolgreich eingeloggt.");
             }
