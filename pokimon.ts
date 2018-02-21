@@ -46,6 +46,7 @@ namespace pokimon {
             this.lastClean = Date.now() * 1000 / 60;
             this.lastPet = Date.now() * 1000 / 60;
             this.stamina = 100;
+            this.lv_up();
             //change visual
         }
 
@@ -78,13 +79,18 @@ namespace pokimon {
 
         feed(type: Food): void {
 
-            let staminaGain: number = type.getCalories();
+            if (type.anzahl > 0) {
+                let staminaGain: number = type.getCalories();
 
-            this.stamina += staminaGain;
+                this.stamina += staminaGain;
 
-            if (this.stamina >= 100)
-                this.stamina = 100;
+                if (this.stamina >= 100)
+                    this.stamina = 100;
 
+                type.anzahl--;
+            }
+            else
+                alert("Du hast keine " + type.getName() + " mehr! Gehe mit deinem Pokimon raus um neues Essen zu besorgen.");
         }
 
         update_mood(): void {
@@ -113,7 +119,7 @@ namespace pokimon {
 
             this.exp += 10;
 
-            if(this.exp >= this.maxExp) {
+            if (this.exp >= this.maxExp) {
                 this.lv_up();
             }
 
@@ -124,48 +130,53 @@ namespace pokimon {
         }
 
         changeVisual(): void {
-            if (this.name == "Seemops"){
-                if (this.mood == "happy"){
-                    img = document.getElementById("happy-seemops") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
+            if (this.mood == "happy") {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + "-happy.png";
+                img.onload = function () {
+                    crc.drawImage(img, 50, 100, 800, 800);
                 }
-                if (this.mood == "sad"){
-                    img = document.getElementById("sad-seemops") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
-                }
-                if (this.lv == 0){
-                    img = document.getElementById("egg-seemops") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
-                }
-                else {
-                    img = document.getElementById("seemops") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
-                }
-
             }
-
-            if (this.name == "Flegmon"){
-                if (this.mood == "happy"){
-                    img = document.getElementById("happy-slowpoke") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
+            if (this.mood == "sad") {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + "-sad.png";
+                img.onload = function () {
+                    crc.drawImage(img, 50, 100, 800, 800);
                 }
-                if (this.mood == "sad"){
-                    img = document.getElementById("sad-slowpoke") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
+            }
+            if (this.lv == 0) {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + "-egg.png";
+                img.onload = function () {
+                    crc.drawImage(img, 50, 100, 800, 800);
                 }
-                if (this.lv == 0){
-                    img = document.getElementById("egg-slowpoke") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
+            }
+            else {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + ".png";
+                img.onload = function () {
+                    crc.drawImage(img, 50, 100, 800, 800);
                 }
-                else {
-                    img = document.getElementById("slowpoke") as HTMLImageElement;
-                    crc.drawImage(img,40,50,650,400);
-                }
-
             }
 
         }
 
+        // showHearts() {
+        //     img = new Image();
+        //     img.src = "img/hearts.png";
+        //     img.addEventListener('load', function() {
+        //         let interval = setInterval(function() {
+        //             let x: number = 0, y: number = 0;
+        //
+        //             return function() {
+        //                 crc.clearRect(0, 0 crc.canvas.width, crc.canvas.height);
+        //                 crc.drawImage(img, x, y);
+        //
+        //                 y++;
+        //             }
+        //         }
+        //     }
+        // }
 
     }
 }

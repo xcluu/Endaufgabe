@@ -15,6 +15,7 @@ var pokimon;
             this.lastClean = Date.now() * 1000 / 60;
             this.lastPet = Date.now() * 1000 / 60;
             this.stamina = 100;
+            this.lv_up();
             //change visual
         };
         Pokimon.prototype.lv_up = function () {
@@ -33,10 +34,15 @@ var pokimon;
             console.log(this.lastClean);
         };
         Pokimon.prototype.feed = function (type) {
-            var staminaGain = type.getCalories();
-            this.stamina += staminaGain;
-            if (this.stamina >= 100)
-                this.stamina = 100;
+            if (type.anzahl > 0) {
+                var staminaGain = type.getCalories();
+                this.stamina += staminaGain;
+                if (this.stamina >= 100)
+                    this.stamina = 100;
+                type.anzahl--;
+            }
+            else
+                alert("Du hast keine " + type.getName() + " mehr! Gehe mit deinem Pokimon raus um neues Essen zu besorgen.");
         };
         Pokimon.prototype.update_mood = function () {
             var currentTime = Date.now() / 1000 / 60;
@@ -66,41 +72,33 @@ var pokimon;
             return this;
         };
         Pokimon.prototype.changeVisual = function () {
-            if (this.name == "Seemops") {
-                if (this.mood == "happy") {
-                    img = document.getElementById("happy-seemops");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
-                if (this.mood == "sad") {
-                    img = document.getElementById("sad-seemops");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
-                if (this.lv == 0) {
-                    img = document.getElementById("egg-seemops");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
-                else {
-                    img = document.getElementById("seemops");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
+            if (this.mood == "happy") {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + "-happy.png";
+                img.onload = function () {
+                    pokimon.crc.drawImage(img, 50, 100, 800, 800);
+                };
             }
-            if (this.name == "Flegmon") {
-                if (this.mood == "happy") {
-                    img = document.getElementById("happy-slowpoke");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
-                if (this.mood == "sad") {
-                    img = document.getElementById("sad-slowpoke");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
-                if (this.lv == 0) {
-                    img = document.getElementById("egg-slowpoke");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
-                else {
-                    img = document.getElementById("slowpoke");
-                    pokimon.crc.drawImage(img, 40, 50, 650, 400);
-                }
+            if (this.mood == "sad") {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + "-sad.png";
+                img.onload = function () {
+                    pokimon.crc.drawImage(img, 50, 100, 800, 800);
+                };
+            }
+            if (this.lv == 0) {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + "-egg.png";
+                img.onload = function () {
+                    pokimon.crc.drawImage(img, 50, 100, 800, 800);
+                };
+            }
+            else {
+                img = new Image();
+                img.src = "img/" + this.name.toLowerCase() + ".png";
+                img.onload = function () {
+                    pokimon.crc.drawImage(img, 50, 100, 800, 800);
+                };
             }
         };
         return Pokimon;

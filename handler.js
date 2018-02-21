@@ -8,7 +8,7 @@ var pokimon;
             this.storage.createPlayer(name, pw);
         };
         Handler.prototype.login = function (name, pw) {
-            this.player = this.stoirage.getPlayer(name, pw);
+            this.player = this.storage.getPlayer(name, pw);
             if (this.player != null) {
                 console.log("erfolgreich eingeloggt.");
             }

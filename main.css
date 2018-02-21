@@ -1,20 +1,64 @@
 canvas {
-    max-width: 90%;
     padding: 0;
     margin: auto;
     display: block;
     border: 1px solid #313131;
+    position: relative;
 }
 
 button {
     border-radius: 50%;
     border: 1px solid #393939;
     background-color: #f3f3f3;
-    padding: 15px;
     width: 75px;
     height: 75px;
+    text-align: center;
+    margin-left: 1vw;
+    margin-right: 1vw;
 }
 
-#button-clean {
+.buttons {
+    text-align: center;
+    margin-top: 34vh;
+}
 
+.slideshow-container {
+    position: relative;
+    margin-left: 70vw;
+    margin-top: -50vh;
+    width: 30vh;
+}
+
+.prev, .next {
+    position: absolute;
+    margin-top: -15px;
+    top: 50%;
+    width: auto;
+}
+.next {
+    right: 0;
+}
+
+.caption {
+    text-align: center;
+    font-size: 10px;
+}
+.mySlides {
+    display: none;
+}
+
+#exp-bar {
+    width: 30vw;
+    position: absolute;
+    margin: auto;
+    left: 12vw;
+    top: 76vh;
+}
+
+#stamina-bar {
+    width: 30vw;
+    position: absolute;
+    margin: auto;
+    right: 12vw;
+    top: 76vh;
 }

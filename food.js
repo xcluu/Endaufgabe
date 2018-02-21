@@ -4,6 +4,7 @@ var pokimon;
         function Food(name, calories) {
             this.name = name;
             this.calories = calories;
+            this.anzahl = 1;
         }
         Food.prototype.getCalories = function () {
             return this.calories;
