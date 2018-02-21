@@ -47,6 +47,7 @@ namespace pokimon {
             this.lastPet = Date.now() * 1000 / 60;
             this.stamina = 100;
             this.lv_up();
+            this.update_mood();
             //change visual
         }
 
@@ -68,13 +69,19 @@ namespace pokimon {
         pet(): void {
 
             this.lastPet = Date.now() / 1000 / 60;
+            //this.update_mood();
 
+            showHearts();
         }
 
         clean(): void {
 
             this.lastClean = Date.now() / 1000 / 60;
             console.log(this.lastClean);
+            //this.update_mood();
+
+            showHearts();
+
         }
 
         feed(type: Food): void {
@@ -130,53 +137,38 @@ namespace pokimon {
         }
 
         changeVisual(): void {
+            crc.clearRect(0, 0, 1000, 1000);
+            crc.putImageData(bgImg, 0, 0);
+
             if (this.mood == "happy") {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-happy.png";
-                img.onload = function () {
+                img.onload = function() {
                     crc.drawImage(img, 50, 100, 800, 800);
-                }
+                };
             }
             if (this.mood == "sad") {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-sad.png";
-                img.onload = function () {
+                img.onload = function() {
                     crc.drawImage(img, 50, 100, 800, 800);
-                }
+                };
             }
             if (this.lv == 0) {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-egg.png";
-                img.onload = function () {
+                img.onload = function() {
                     crc.drawImage(img, 50, 100, 800, 800);
-                }
+                };
             }
-            else {
+            if (this.mood == "okay"){
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + ".png";
-                img.onload = function () {
+                img.onload = function() {
                     crc.drawImage(img, 50, 100, 800, 800);
-                }
+                };
             }
-
         }
-
-        // showHearts() {
-        //     img = new Image();
-        //     img.src = "img/hearts.png";
-        //     img.addEventListener('load', function() {
-        //         let interval = setInterval(function() {
-        //             let x: number = 0, y: number = 0;
-        //
-        //             return function() {
-        //                 crc.clearRect(0, 0 crc.canvas.width, crc.canvas.height);
-        //                 crc.drawImage(img, x, y);
-        //
-        //                 y++;
-        //             }
-        //         }
-        //     }
-        // }
 
     }
 }

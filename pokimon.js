@@ -16,6 +16,7 @@ var pokimon;
             this.lastPet = Date.now() * 1000 / 60;
             this.stamina = 100;
             this.lv_up();
+            this.update_mood();
             //change visual
         };
         Pokimon.prototype.lv_up = function () {
@@ -28,10 +29,14 @@ var pokimon;
         };
         Pokimon.prototype.pet = function () {
             this.lastPet = Date.now() / 1000 / 60;
+            //this.update_mood();
+            pokimon.showHearts();
         };
         Pokimon.prototype.clean = function () {
             this.lastClean = Date.now() / 1000 / 60;
             console.log(this.lastClean);
+            //this.update_mood();
+            pokimon.showHearts();
         };
         Pokimon.prototype.feed = function (type) {
             if (type.anzahl > 0) {
@@ -72,6 +77,8 @@ var pokimon;
             return this;
         };
         Pokimon.prototype.changeVisual = function () {
+            pokimon.crc.clearRect(0, 0, 1000, 1000);
+            pokimon.crc.putImageData(pokimon.bgImg, 0, 0);
             if (this.mood == "happy") {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-happy.png";
@@ -93,7 +100,7 @@ var pokimon;
                     pokimon.crc.drawImage(img, 50, 100, 800, 800);
                 };
             }
-            else {
+            if (this.mood == "okay") {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + ".png";
                 img.onload = function () {

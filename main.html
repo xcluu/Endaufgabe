@@ -54,6 +54,13 @@
         <i class="fas fa-angle-right next" onclick="plusSlides(1)"></i>
     </div>
 
+    <div class="buttons">
+        <button id="button-pet">pet</button>
+        <button id="button-feed">feed</button>
+        <button id="button-clean">clean</button>
+        <button id="button-go-out" style="">go out</button>
+    </div>
+
     <script>
         var slideIndex = 1;
         showSlides(slideIndex);
@@ -71,26 +78,14 @@
         function showSlides(n) {
             var i;
             var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("dot");
             if (n > slides.length) {slideIndex = 1}
             if (n < 1) {slideIndex = slides.length}
             for (i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
             slides[slideIndex-1].style.display = "block";
-            dots[slideIndex-1].className += " active";
         }
     </script>
 
-
-    <div class="buttons">
-        <button id="button-pet">pet</button>
-        <button id="button-feed">feed</button>
-        <button id="button-clean">clean</button>
-        <button id="button-go-out" style="">go out</button>
-    </div>
 </body>
 </html>
