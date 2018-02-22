@@ -29,22 +29,25 @@ var pokimon;
         };
         Pokimon.prototype.pet = function () {
             this.lastPet = Date.now() / 1000 / 60;
-            //this.update_mood();
+            this.update_mood();
             pokimon.showHearts();
         };
         Pokimon.prototype.clean = function () {
             this.lastClean = Date.now() / 1000 / 60;
-            console.log(this.lastClean);
-            //this.update_mood();
+            this.update_mood();
             pokimon.showHearts();
         };
         Pokimon.prototype.feed = function (type) {
+            console.log(type);
             if (type.anzahl > 0) {
                 var staminaGain = type.getCalories();
+                if (type.name == "Omnombeere")
+                    staminaGain = 1 + Math.random() * 100;
                 this.stamina += staminaGain;
                 if (this.stamina >= 100)
                     this.stamina = 100;
                 type.anzahl--;
+                return;
             }
             else
                 alert("Du hast keine " + type.getName() + " mehr! Gehe mit deinem Pokimon raus um neues Essen zu besorgen.");
@@ -61,7 +64,8 @@ var pokimon;
                 currentTime - this.lastClean >= 2 &&
                 currentTime - this.lastPet >= 2)
                 this.mood = "sad";
-            console.log(currentTime - this.lastClean);
+            console.log("last clean: " + (currentTime - this.lastClean));
+            console.log("last pet: " + (currentTime - this.lastPet));
             console.log(this.mood);
         };
         Pokimon.prototype.update_stamina = function () {

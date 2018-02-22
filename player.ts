@@ -12,11 +12,6 @@ namespace pokimon {
             this.name = name;
         }
 
-        choose_Pokimon(pokimon: Pokimon): void {
-            this.pokimon.push(pokimon);
-        }
-
-
     }
 
 }
