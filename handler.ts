@@ -34,11 +34,11 @@ namespace pokimon {
             let flegmon: any = document.getElementById("div-flegmon") as HTMLDivElement;
 
             seemops.addEventListener('click', function() {
-                this.choose_pokimon("Seemops");
+                this.choose_pokimon("Seemobs");
             }.bind(this));
 
             flegmon.addEventListener('click', function() {
-                this.choose_pokimon("Flegmon");
+                this.choose_pokimon("Flagmon");
             }.bind(this));
         }
 

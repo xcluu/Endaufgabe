@@ -8,8 +8,8 @@ namespace pokimon {
 
     export let flegmonEgg: HTMLImageElement = new Image();
     export let seemopsEgg: HTMLImageElement = new Image();
-    flegmonEgg.src = "img/flegmon-egg.png";
-    seemopsEgg.src = "img/seemops-egg.png";
+    flegmonEgg.src = "img/flagmon-egg.png";
+    seemopsEgg.src = "img/seemobs-egg.png";
 
     let h: Handler;
 

@@ -2,7 +2,7 @@ namespace pokimon {
 
     let img: HTMLImageElement;
 
-    interface IntPokimon {
+    interface IntPokomon {
         name: string;
 
         mood: string;
@@ -16,7 +16,7 @@ namespace pokimon {
     }
 
 
-    export class Pokimon implements IntPokimon {
+    export class Pokimon implements IntPokomon {
 
         name: string;
 

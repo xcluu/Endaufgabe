@@ -20,10 +20,10 @@ var pokimon;
             var seemops = document.getElementById("div-seemops");
             var flegmon = document.getElementById("div-flegmon");
             seemops.addEventListener('click', function () {
-                this.choose_pokimon("Seemops");
+                this.choose_pokimon("Seemobs");
             }.bind(this));
             flegmon.addEventListener('click', function () {
-                this.choose_pokimon("Flegmon");
+                this.choose_pokimon("Flagmon");
             }.bind(this));
         };
         Handler.prototype.choose_pokimon = function (name) {

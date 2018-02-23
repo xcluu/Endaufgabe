@@ -146,4 +146,4 @@ var pokimon;
     }());
     pokimon.Pokimon = Pokimon;
 })(pokimon || (pokimon = {}));
-//# sourceMappingURL=pokimon.js.map
+//# sourceMappingURL=pokomon.js.map

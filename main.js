@@ -5,8 +5,8 @@ var pokimon;
     img.src = "img/hearts.png";
     pokimon.flegmonEgg = new Image();
     pokimon.seemopsEgg = new Image();
-    pokimon.flegmonEgg.src = "img/flegmon-egg.png";
-    pokimon.seemopsEgg.src = "img/seemops-egg.png";
+    pokimon.flegmonEgg.src = "img/flagmon-egg.png";
+    pokimon.seemopsEgg.src = "img/seemobs-egg.png";
     var h;
     window.addEventListener("load", main);
     function main() {
