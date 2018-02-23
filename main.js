@@ -18,29 +18,25 @@ var pokimon;
         pokimon.crc.fillRect(0, 0, 1000, 1000);
         pokimon.bgImg = pokimon.crc.getImageData(0, 0, 1000, 1000);
         h = new pokimon.Handler();
-        p = h.choose_pokimon("Flegmon");
-        f = h.create_food();
         var petBtn = document.getElementById("button-pet");
-        petBtn.addEventListener('click', p.pet.bind(p));
+        petBtn.addEventListener('click', h.pokimon.pet.bind(h.pokimon));
         var cleanBtn = document.getElementById("button-clean");
-        cleanBtn.addEventListener('click', p.clean.bind(p));
+        cleanBtn.addEventListener('click', h.pokimon.clean.bind(h.pokimon));
         var feedBtn = document.getElementById("button-feed");
         feedBtn.addEventListener('click', feed);
         var gooutBtn = document.getElementById("button-go-out");
         gooutBtn.addEventListener('click', go_out);
-        update();
-        update2();
     }
     function feed() {
         var carrotImg = document.getElementById("karotte");
         var pizzaImg = document.getElementById("pizza");
         var omnomImg = document.getElementById("omnombeere");
         if (carrotImg.style.display == "block")
-            p.feed(f['karotte']);
+            h.pokimon.feed(h.food['karotte']);
         if (pizzaImg.style.display == "block")
-            p.feed(f['pizza']);
+            h.pokimon.feed(h.food['pizza']);
         if (omnomImg.style.display == "block")
-            p.feed(f['omnombeere']);
+            h.pokimon.feed(h.food['omnombeere']);
         update();
     }
     function go_out() {
@@ -50,9 +46,9 @@ var pokimon;
         pizza = Math.round(pizza);
         var omnomberries = 1 + Math.random() * 3;
         omnomberries = Math.round(omnomberries);
-        f['karotte'].anzahl += carrots;
-        f['pizza'].anzahl += pizza;
-        f['omnombeere'].anzahl += omnomberries;
+        h.food['karotte'].anzahl += carrots;
+        h.food['pizza'].anzahl += pizza;
+        h.food['omnombeere'].anzahl += omnomberries;
         alert("Oh! Während dem Spazierengehen hast du folgendes auf der Straße gefunden: \n" + "Karotten: " + carrots + "\nPizza: " + pizza + "\nOmnombeeren: " + omnomberries);
         update();
     }
@@ -62,37 +58,48 @@ var pokimon;
         window.setTimeout(function () {
             pokimon.crc.clearRect(0, 0, 1000, 1000);
             pokimon.crc.putImageData(pokimon.staticImg, 0, 0);
-            p.changeVisual();
+            h.pokimon.update_img();
         }, 1500);
     }
     pokimon.showHearts = showHearts;
+    function toggleVisibility() {
+        var postChoose = document.getElementById("post-all");
+        var preChoose = document.getElementById("pre-all");
+        preChoose.style.display = "none";
+        postChoose.style.display = "block";
+    }
+    pokimon.toggleVisibility = toggleVisibility;
     function update() {
         var captionP = document.getElementById("captionP");
         var captionO = document.getElementById("captionO");
         var captionC = document.getElementById("captionC");
-        captionP.innerHTML = f['pizza'].anzahl;
-        captionO.innerHTML = f['omnombeere'].anzahl;
-        captionC.innerHTML = f['karotte'].anzahl;
+        captionP.innerHTML = h.food['pizza'].anzahl;
+        captionO.innerHTML = h.food['omnombeere'].anzahl;
+        captionC.innerHTML = h.food['karotte'].anzahl;
         var staminaBar = document.getElementById("stamina-progress");
         var expBar = document.getElementById("exp-progress");
-        staminaBar.setAttribute("aria-valuenow", p.stamina.toString());
-        staminaBar.style.width = p.stamina.toString() + "%";
-        staminaBar.innerHTML = p.stamina.toString();
-        expBar.setAttribute("aria-valuemax", p.maxExp.toString());
-        expBar.setAttribute("aria-valuenow", p.exp.toString());
-        expBar.style.width = ((p.exp / p.maxExp) * 100).toString() + "%";
-        expBar.innerHTML = p.exp.toString() + "/" + p.maxExp.toString();
+        staminaBar.setAttribute("aria-valuenow", h.pokimon.stamina.toString());
+        staminaBar.style.width = h.pokimon.stamina.toString() + "%";
+        staminaBar.innerHTML = h.pokimon.stamina.toString();
+        expBar.setAttribute("aria-valuemax", h.pokimon.maxExp.toString());
+        expBar.setAttribute("aria-valuenow", h.pokimon.exp.toString());
+        expBar.style.width = ((h.pokimon.exp / h.pokimon.maxExp) * 100).toString() + "%";
+        expBar.innerHTML = h.pokimon.exp.toString() + "/" + h.pokimon.maxExp.toString();
+        var lvlDiv = document.getElementById("lvl");
+        lvlDiv.innerHTML = "Level " + h.pokimon.lv.toString();
     }
+    pokimon.update = update;
     function update2() {
-        window.setTimeout(update2, 1000);
-        p.update_experience();
-        p.update_stamina();
+        window.setTimeout(update2, 1500);
+        h.pokimon.update_experience();
+        h.pokimon.update_stamina();
         update();
-        if (p.lv > 0) {
-            p.update_mood();
-            p.changeVisual();
+        if (h.pokimon.lv > 0) {
+            h.pokimon.update_mood();
+            h.pokimon.update_img();
         }
         console.log("update2");
     }
+    pokimon.update2 = update2;
 })(pokimon || (pokimon = {}));
 //# sourceMappingURL=main.js.map

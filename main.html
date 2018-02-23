@@ -23,32 +23,63 @@
             height="1000"
             style="width:80vw; height:80vh">
     </canvas>
+
+    <div id="pre-all">
+        <div class="text" id="choose">
+            Choose an egg!
+        </div>
+
+        <div class="text" id="flegmon">Flegmon</div>
+        <div class="text" id="seemops">Seemops</div>
+
+        <div id="div-seemops" style="width: 16vw; height: 35vh; position: absolute; top: 18vh; right: 33vw;"></div>
+        <div id="div-flegmon" style="width: 16vw; height: 35vh; position: absolute; top: 18vh; left: 28vw;"></div>
+
+    </div>
+
+
+
+<div id="post-all" style="display: none;">
     <div class="progress" id="exp-bar">
         <div class="progress-bar" id="exp-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
             60%
         </div>
     </div>
     <div class="progress" id="stamina-bar">
-        <div class="progress-bar" id="stamina-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-            60
+        <div class="progress-bar" id="stamina-progress" role="progressbar" aria-valuenow="60" aria-valuemin="2" aria-valuemax="100" style="width: 60%;">
+            60%
         </div>
     </div>
+
+    <div class="text" id="poki-info">
+        <div class="text" id="name"></div>
+        <div class="text" id="lvl"></div>
+    </div>
+
+    <div class="text" id="stamina">Stamina</div>
+    <div class="text" id="exp">EXP</div>
 
 
     <div class="slideshow-container">
         <div id="pizza" class="mySlides">
             <img src="img/pizza.png" style="width: 100%">
             <div id="captionP" class="caption">anzahl</div>
+            <div class="caption">Pizza<br>
+                restores 100 stamina</div>
         </div>
 
         <div id="omnombeere" class="mySlides">
             <img src="img/omnombeere.png" style="width: 100%">
             <div id="captionO" class="caption">anzahl</div>
+            <div class="caption">Omnomberry<br>
+                restores a random amount of stamina</div>
         </div>
 
         <div id="karotte" class="mySlides">
             <img src="img/karotte.png" style="width: 100%">
             <div id="captionC" class="caption">anzahl</div>
+            <div class="caption">Carrot<br>
+                restores 10 stamina</div>
         </div>
         <i class="fas fa-angle-left prev" onclick="plusSlides(-1)"></i>
         <i class="fas fa-angle-right next" onclick="plusSlides(1)"></i>
@@ -60,6 +91,7 @@
         <button id="button-clean">clean</button>
         <button id="button-go-out" style="">go out</button>
     </div>
+</div>
 
     <script>
         var slideIndex = 1;

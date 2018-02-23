@@ -32,6 +32,10 @@ namespace pokimon {
         constructor(name: string) {
             this.name = name;
 
+            let infoName: HTMLDivElement = document.getElementById("name") as HTMLDivElement;
+
+            infoName.innerHTML = name;
+
             this.mood = undefined;
             this.stamina = 100;
             this.lastPet = undefined;
@@ -41,14 +45,14 @@ namespace pokimon {
             this.exp = 0;
             this.maxExp = 25;
 
-            this.changeVisual();
+            this.update_img();
         }
 
         hatch(): void {
             this.lastClean = Date.now() / 1000 / 60;
             this.lastPet = Date.now() / 1000 / 60;
             this.update_mood();
-            this.changeVisual();
+            this.update_img();
             //change visual
         }
 
@@ -59,7 +63,9 @@ namespace pokimon {
             this.exp = this.exp - this.maxExp;
 
             //raise max-exp exponentially
-            this.maxExp = Math.pow(this.maxExp, 2);
+            this.maxExp = Math.pow(this.lv, 2);
+            this.maxExp += 5;
+            this.maxExp = Math.round(this.maxExp);
 
             //raise lv
             this.lv++;
@@ -93,8 +99,10 @@ namespace pokimon {
             if (type.anzahl > 0) {
                 let staminaGain: number = type.getCalories();
 
-                if (type.name == "Omnombeere")
+                if (type.name == "Omnombeere") {
                     staminaGain = 1 + Math.random() * 100;
+                    staminaGain = Math.round(staminaGain);
+                }
 
 
                 this.stamina += staminaGain;
@@ -105,6 +113,7 @@ namespace pokimon {
 
                 type.anzahl--;
 
+                showHearts();
                 return;
             }
             else
@@ -114,9 +123,9 @@ namespace pokimon {
         update_mood(): void {
             let currentTime: number = Date.now() / 1000 / 60;
 
-            if (this.stamina >= 60 ||
-                currentTime - this.lastClean <= 1 ||
-                currentTime - this.lastPet || 1)
+            if (this.stamina >= 70 &&
+                currentTime - this.lastClean <= 1 &&
+                currentTime - this.lastPet <= 1)
                 this.mood = "happy";
             else this.mood = "okay";
 
@@ -139,8 +148,10 @@ namespace pokimon {
         }
 
         update_experience(): void {
+            if (this.stamina == 0)
+                return;
 
-            this.exp += 20;
+            this.exp += 5;
 
             if (this.exp >= this.maxExp) {
                 this.lv_up();
@@ -152,37 +163,58 @@ namespace pokimon {
             return this;
         }
 
-        changeVisual(): void {
+        update_img(): void {
             crc.clearRect(0, 0, 1000, 1000);
             crc.putImageData(bgImg, 0, 0);
+
+            let imgsrc: string;
+            //check if img src changed (dont load img if not)
+            if (img != undefined)
+                imgsrc = img.src;
 
             if (this.mood == "happy") {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-happy.png";
-                img.onload = function() {
-                    crc.drawImage(img, 50, 100, 800, 800);
-                };
+                if (img.src != imgsrc) {
+                    img.onload = function () {
+                        crc.drawImage(img, 50, 100, 800, 800);
+                    };
+                    return;
+                }
+                crc.drawImage(img, 50, 100, 800, 800);
             }
             if (this.mood == "sad") {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-sad.png";
-                img.onload = function() {
-                    crc.drawImage(img, 50, 100, 800, 800);
-                };
+                if (img.src != imgsrc) {
+                    img.onload = function () {
+                        crc.drawImage(img, 50, 100, 800, 800);
+                    };
+                    return;
+                }
+                crc.drawImage(img, 50, 100, 800, 800);
             }
             if (this.lv == 0) {
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + "-egg.png";
-                img.onload = function() {
-                    crc.drawImage(img, 50, 100, 800, 800);
-                };
+                if (img.src != imgsrc) {
+                    img.onload = function () {
+                        crc.drawImage(img, 50, 100, 800, 800);
+                    };
+                    return;
+                }
+                crc.drawImage(img, 50, 100, 800, 800);
             }
             if (this.mood == "okay"){
                 img = new Image();
                 img.src = "img/" + this.name.toLowerCase() + ".png";
-                img.onload = function() {
-                    crc.drawImage(img, 50, 100, 800, 800);
-                };
+                if (img.src != imgsrc) {
+                    img.onload = function () {
+                        crc.drawImage(img, 50, 100, 800, 800);
+                    };
+                    return;
+                }
+                crc.drawImage(img, 50, 100, 800, 800);
             }
         }
 
