@@ -33,21 +33,22 @@ namespace pokimon {
             this.name = name;
 
             this.mood = undefined;
-            this.stamina = undefined;
+            this.stamina = 100;
             this.lastPet = undefined;
 
 
             this.lv = 0;
             this.exp = 0;
             this.maxExp = 25;
+
+            this.changeVisual();
         }
 
         hatch(): void {
-            this.lastClean = Date.now() * 1000 / 60;
-            this.lastPet = Date.now() * 1000 / 60;
-            this.stamina = 100;
-            this.lv_up();
+            this.lastClean = Date.now() / 1000 / 60;
+            this.lastPet = Date.now() / 1000 / 60;
             this.update_mood();
+            this.changeVisual();
             //change visual
         }
 
@@ -55,13 +56,16 @@ namespace pokimon {
         lv_up(): void {
 
             //reset current exp
-            this.exp = this.maxExp - this.exp;
+            this.exp = this.exp - this.maxExp;
 
             //raise max-exp exponentially
-            this.maxExp = this.maxExp ^ 2;
+            this.maxExp = Math.pow(this.maxExp, 2);
 
             //raise lv
             this.lv++;
+
+            if (this.lv == 1)
+                this.hatch();
 
         }
 
@@ -110,14 +114,14 @@ namespace pokimon {
         update_mood(): void {
             let currentTime: number = Date.now() / 1000 / 60;
 
-            if (this.stamina >= 60 &&
-                currentTime - this.lastClean <= 1 &&
-                currentTime - this.lastPet <= 1)
+            if (this.stamina >= 60 ||
+                currentTime - this.lastClean <= 1 ||
+                currentTime - this.lastPet || 1)
                 this.mood = "happy";
             else this.mood = "okay";
 
-            if (this.stamina <= 30 &&
-                currentTime - this.lastClean >= 2 &&
+            if (this.stamina <= 30 ||
+                currentTime - this.lastClean >= 2 ||
                 currentTime - this.lastPet >= 2)
                 this.mood = "sad";
 
@@ -128,12 +132,15 @@ namespace pokimon {
         }
 
         update_stamina(): void {
-            this.stamina--;
+
+            if (this.stamina > 0) {
+                this.stamina--;
+            }
         }
 
         update_experience(): void {
 
-            this.exp += 10;
+            this.exp += 20;
 
             if (this.exp >= this.maxExp) {
                 this.lv_up();

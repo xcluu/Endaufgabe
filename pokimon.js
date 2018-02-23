@@ -5,27 +5,29 @@ var pokimon;
         function Pokimon(name) {
             this.name = name;
             this.mood = undefined;
-            this.stamina = undefined;
+            this.stamina = 100;
             this.lastPet = undefined;
             this.lv = 0;
             this.exp = 0;
             this.maxExp = 25;
+            this.changeVisual();
         }
         Pokimon.prototype.hatch = function () {
-            this.lastClean = Date.now() * 1000 / 60;
-            this.lastPet = Date.now() * 1000 / 60;
-            this.stamina = 100;
-            this.lv_up();
+            this.lastClean = Date.now() / 1000 / 60;
+            this.lastPet = Date.now() / 1000 / 60;
             this.update_mood();
+            this.changeVisual();
             //change visual
         };
         Pokimon.prototype.lv_up = function () {
             //reset current exp
-            this.exp = this.maxExp - this.exp;
+            this.exp = this.exp - this.maxExp;
             //raise max-exp exponentially
-            this.maxExp = this.maxExp ^ 2;
+            this.maxExp = Math.pow(this.maxExp, 2);
             //raise lv
             this.lv++;
+            if (this.lv == 1)
+                this.hatch();
         };
         Pokimon.prototype.pet = function () {
             this.lastPet = Date.now() / 1000 / 60;
@@ -54,14 +56,14 @@ var pokimon;
         };
         Pokimon.prototype.update_mood = function () {
             var currentTime = Date.now() / 1000 / 60;
-            if (this.stamina >= 60 &&
-                currentTime - this.lastClean <= 1 &&
-                currentTime - this.lastPet <= 1)
+            if (this.stamina >= 60 ||
+                currentTime - this.lastClean <= 1 ||
+                currentTime - this.lastPet || 1)
                 this.mood = "happy";
             else
                 this.mood = "okay";
-            if (this.stamina <= 30 &&
-                currentTime - this.lastClean >= 2 &&
+            if (this.stamina <= 30 ||
+                currentTime - this.lastClean >= 2 ||
                 currentTime - this.lastPet >= 2)
                 this.mood = "sad";
             console.log("last clean: " + (currentTime - this.lastClean));
@@ -69,10 +71,12 @@ var pokimon;
             console.log(this.mood);
         };
         Pokimon.prototype.update_stamina = function () {
-            this.stamina--;
+            if (this.stamina > 0) {
+                this.stamina--;
+            }
         };
         Pokimon.prototype.update_experience = function () {
-            this.exp += 10;
+            this.exp += 20;
             if (this.exp >= this.maxExp) {
                 this.lv_up();
             }

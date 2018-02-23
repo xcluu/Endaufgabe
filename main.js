@@ -20,8 +20,6 @@ var pokimon;
         h = new pokimon.Handler();
         p = h.choose_pokimon("Flegmon");
         f = h.create_food();
-        p.hatch();
-        p.changeVisual();
         var petBtn = document.getElementById("button-pet");
         petBtn.addEventListener('click', p.pet.bind(p));
         var cleanBtn = document.getElementById("button-clean");
@@ -31,6 +29,7 @@ var pokimon;
         var gooutBtn = document.getElementById("button-go-out");
         gooutBtn.addEventListener('click', go_out);
         update();
+        update2();
     }
     function feed() {
         var carrotImg = document.getElementById("karotte");
@@ -74,6 +73,26 @@ var pokimon;
         captionP.innerHTML = f['pizza'].anzahl;
         captionO.innerHTML = f['omnombeere'].anzahl;
         captionC.innerHTML = f['karotte'].anzahl;
+        var staminaBar = document.getElementById("stamina-progress");
+        var expBar = document.getElementById("exp-progress");
+        staminaBar.setAttribute("aria-valuenow", p.stamina.toString());
+        staminaBar.style.width = p.stamina.toString() + "%";
+        staminaBar.innerHTML = p.stamina.toString();
+        expBar.setAttribute("aria-valuemax", p.maxExp.toString());
+        expBar.setAttribute("aria-valuenow", p.exp.toString());
+        expBar.style.width = ((p.exp / p.maxExp) * 100).toString() + "%";
+        expBar.innerHTML = p.exp.toString() + "/" + p.maxExp.toString();
+    }
+    function update2() {
+        window.setTimeout(update2, 1000);
+        p.update_experience();
+        p.update_stamina();
+        update();
+        if (p.lv > 0) {
+            p.update_mood();
+            p.changeVisual();
+        }
+        console.log("update2");
     }
 })(pokimon || (pokimon = {}));
 //# sourceMappingURL=main.js.map
