@@ -6,6 +6,10 @@ namespace pokimon {
     img = new Image();
     img.src = "img/hearts.png";
 
+    export let flegmonEgg: HTMLImageElement = new Image();
+    export let seemopsEgg: HTMLImageElement = new Image();
+    flegmonEgg.src = "img/flegmon-egg.png";
+    seemopsEgg.src = "img/seemops-egg.png";
 
     let h: Handler;
 
@@ -15,6 +19,8 @@ namespace pokimon {
     function main(): void {
         let canvas: HTMLCanvasElement = <HTMLCanvasElement> document.getElementById("canvas");
         crc = canvas.getContext("2d");
+
+
 
 
 
@@ -28,7 +34,7 @@ namespace pokimon {
         bgImg = crc.getImageData(0, 0, 1000, 1000);
 
         h = new Handler();
-
+        h.create_Eggs();
     }
 
     export function feed(): void {

@@ -6,16 +6,10 @@ namespace pokimon {
     pokimon: Pokimon;
     food: Food[] = [];
 
-    flegmonEgg: HTMLImageElement = new Image();
-    seemopsEgg: HTMLImageElement = new Image();
 
 
         constructor() {
             //this.storage = new Storage();
-            this.flegmonEgg.src = "img/flegmon-egg.png";
-            this.seemopsEgg.src = "img/seemops-egg.png";
-            this.create_Eggs();
-
         }
 
         register(name: string, pw: string): void {
@@ -33,8 +27,8 @@ namespace pokimon {
         create_Eggs() {
 
 
-            crc.drawImage(this.flegmonEgg, -50, 100, 800, 800);
-            crc.drawImage(this.seemopsEgg, 250, 100, 800, 800);
+            crc.drawImage(flegmonEgg, -50, 100, 800, 800);
+            crc.drawImage(seemopsEgg, 250, 100, 800, 800);
 
             let seemops: any = document.getElementById("div-seemops") as HTMLDivElement;
             let flegmon: any = document.getElementById("div-flegmon") as HTMLDivElement;

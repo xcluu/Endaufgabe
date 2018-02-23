@@ -3,12 +3,7 @@ var pokimon;
     var Handler = /** @class */ (function () {
         function Handler() {
             this.food = [];
-            this.flegmonEgg = new Image();
-            this.seemopsEgg = new Image();
             //this.storage = new Storage();
-            this.flegmonEgg.src = "img/flegmon-egg.png";
-            this.seemopsEgg.src = "img/seemops-egg.png";
-            this.create_Eggs();
         }
         Handler.prototype.register = function (name, pw) {
             this.storage.createPlayer(name, pw);
@@ -20,8 +15,8 @@ var pokimon;
             }
         };
         Handler.prototype.create_Eggs = function () {
-            pokimon.crc.drawImage(this.flegmonEgg, -50, 100, 800, 800);
-            pokimon.crc.drawImage(this.seemopsEgg, 250, 100, 800, 800);
+            pokimon.crc.drawImage(pokimon.flegmonEgg, -50, 100, 800, 800);
+            pokimon.crc.drawImage(pokimon.seemopsEgg, 250, 100, 800, 800);
             var seemops = document.getElementById("div-seemops");
             var flegmon = document.getElementById("div-flegmon");
             seemops.addEventListener('click', function () {

@@ -3,6 +3,10 @@ var pokimon;
     var img;
     img = new Image();
     img.src = "img/hearts.png";
+    pokimon.flegmonEgg = new Image();
+    pokimon.seemopsEgg = new Image();
+    pokimon.flegmonEgg.src = "img/flegmon-egg.png";
+    pokimon.seemopsEgg.src = "img/seemops-egg.png";
     var h;
     window.addEventListener("load", main);
     function main() {
@@ -16,6 +20,7 @@ var pokimon;
         pokimon.crc.fillRect(0, 0, 1000, 1000);
         pokimon.bgImg = pokimon.crc.getImageData(0, 0, 1000, 1000);
         h = new pokimon.Handler();
+        h.create_Eggs();
     }
     function feed() {
         var carrotImg = document.getElementById("karotte");
