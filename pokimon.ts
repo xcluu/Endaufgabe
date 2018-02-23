@@ -134,10 +134,6 @@ namespace pokimon {
                 currentTime - this.lastPet >= 2)
                 this.mood = "sad";
 
-            console.log("last clean: " + (currentTime - this.lastClean));
-            console.log("last pet: " + (currentTime - this.lastPet));
-            console.log(this.mood);
-
         }
 
         update_stamina(): void {

@@ -12,7 +12,10 @@ namespace pokimon {
 
         constructor() {
             //this.storage = new Storage();
+            this.flegmonEgg.src = "img/flegmon-egg.png";
+            this.seemopsEgg.src = "img/seemops-egg.png";
             this.create_Eggs();
+
         }
 
         register(name: string, pw: string): void {
@@ -28,10 +31,7 @@ namespace pokimon {
         }
 
         create_Eggs() {
-            this.flegmonEgg.src = "img/flegmon-egg.png";
-            this.seemopsEgg.src = "img/seemops-egg.png";
 
-            console.log("test");
 
             crc.drawImage(this.flegmonEgg, -50, 100, 800, 800);
             crc.drawImage(this.seemopsEgg, 250, 100, 800, 800);
@@ -50,7 +50,7 @@ namespace pokimon {
 
         choose_pokimon(name: string): Pokimon {
             //push pokimon in db
-            console.log(name);
+
 
             this.pokimon = new Pokimon(name);
             this.food = this.create_food();
@@ -58,8 +58,23 @@ namespace pokimon {
             toggleVisibility();
             update();
             update2();
+            this.addHandler();
 
             return this.pokimon;
+        }
+
+        addHandler(): void {
+            let petBtn: HTMLButtonElement = document.getElementById("button-pet") as HTMLButtonElement;
+            petBtn.addEventListener('click', this.pokimon.pet.bind(this.pokimon));
+
+            let cleanBtn: HTMLButtonElement = document.getElementById("button-clean") as HTMLButtonElement;
+            cleanBtn.addEventListener('click', this.pokimon.clean.bind(this.pokimon));
+
+            let feedBtn: HTMLButtonElement = document.getElementById("button-feed") as HTMLButtonElement;
+            feedBtn.addEventListener('click', feed);
+
+            let gooutBtn: HTMLButtonElement = document.getElementById("button-go-out") as HTMLButtonElement;
+            gooutBtn.addEventListener('click', go_out);
         }
 
         create_food(): Food[] {

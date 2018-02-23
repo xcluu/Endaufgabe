@@ -73,9 +73,6 @@ var pokimon;
                 currentTime - this.lastClean >= 2 ||
                 currentTime - this.lastPet >= 2)
                 this.mood = "sad";
-            console.log("last clean: " + (currentTime - this.lastClean));
-            console.log("last pet: " + (currentTime - this.lastPet));
-            console.log(this.mood);
         };
         Pokimon.prototype.update_stamina = function () {
             if (this.stamina > 0) {

@@ -7,6 +7,8 @@ namespace pokimon {
         passwords: string[];
 
 
+
+
         constructor() {
             this.players = [];
             this.passwords = [];
@@ -15,6 +17,7 @@ namespace pokimon {
         }
 
         getPlayer(name: string, pw: string): Player {
+
             if (this.players[name] == null) {
                 console.log("Spieler '" + name + "' nicht gefunden.");
                 return null;
@@ -43,4 +46,15 @@ namespace pokimon {
         }
 
     }
+
+//     window.addEventListener("load", main);
+//
+//     function main(): void {
+//         let loginBtn: any = document.getElementById("login-button") as HTMLButtonElement;
+//
+//         let storage: Storage = new Storage();
+//
+//         console.log("hi");
+//         loginBtn.addEventListener("click", storage.getPlayer(username, password));
+//     }
 }

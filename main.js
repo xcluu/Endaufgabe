@@ -4,8 +4,6 @@ var pokimon;
     img = new Image();
     img.src = "img/hearts.png";
     var h;
-    var p;
-    var f = [];
     window.addEventListener("load", main);
     function main() {
         var canvas = document.getElementById("canvas");
@@ -18,14 +16,6 @@ var pokimon;
         pokimon.crc.fillRect(0, 0, 1000, 1000);
         pokimon.bgImg = pokimon.crc.getImageData(0, 0, 1000, 1000);
         h = new pokimon.Handler();
-        var petBtn = document.getElementById("button-pet");
-        petBtn.addEventListener('click', h.pokimon.pet.bind(h.pokimon));
-        var cleanBtn = document.getElementById("button-clean");
-        cleanBtn.addEventListener('click', h.pokimon.clean.bind(h.pokimon));
-        var feedBtn = document.getElementById("button-feed");
-        feedBtn.addEventListener('click', feed);
-        var gooutBtn = document.getElementById("button-go-out");
-        gooutBtn.addEventListener('click', go_out);
     }
     function feed() {
         var carrotImg = document.getElementById("karotte");
@@ -39,7 +29,9 @@ var pokimon;
             h.pokimon.feed(h.food['omnombeere']);
         update();
     }
+    pokimon.feed = feed;
     function go_out() {
+        console.log("go out");
         var carrots = 1 + Math.random() * 3;
         carrots = Math.round(carrots);
         var pizza = Math.random();
@@ -52,6 +44,7 @@ var pokimon;
         alert("Oh! Während dem Spazierengehen hast du folgendes auf der Straße gefunden: \n" + "Karotten: " + carrots + "\nPizza: " + pizza + "\nOmnombeeren: " + omnomberries);
         update();
     }
+    pokimon.go_out = go_out;
     function showHearts() {
         pokimon.staticImg = pokimon.crc.getImageData(0, 0, 1000, 1000);
         pokimon.crc.drawImage(img, 450, 10, 200, 200);
@@ -98,7 +91,6 @@ var pokimon;
             h.pokimon.update_mood();
             h.pokimon.update_img();
         }
-        console.log("update2");
     }
     pokimon.update2 = update2;
 })(pokimon || (pokimon = {}));

@@ -8,8 +8,6 @@ namespace pokimon {
 
 
     let h: Handler;
-    let p: Pokimon;
-    let f: Food[] = [];
 
 
     window.addEventListener("load", main);
@@ -31,22 +29,9 @@ namespace pokimon {
 
         h = new Handler();
 
-
-
-        let petBtn: HTMLButtonElement = document.getElementById("button-pet") as HTMLButtonElement;
-        petBtn.addEventListener('click', h.pokimon.pet.bind(h.pokimon));
-
-        let cleanBtn: HTMLButtonElement = document.getElementById("button-clean") as HTMLButtonElement;
-        cleanBtn.addEventListener('click', h.pokimon.clean.bind(h.pokimon));
-
-        let feedBtn: HTMLButtonElement = document.getElementById("button-feed") as HTMLButtonElement;
-        feedBtn.addEventListener('click', feed);
-
-        let gooutBtn: HTMLButtonElement = document.getElementById("button-go-out") as HTMLButtonElement;
-        gooutBtn.addEventListener('click', go_out);
     }
 
-    function feed(): void {
+    export function feed(): void {
         let carrotImg: HTMLDivElement = document.getElementById("karotte") as HTMLDivElement;
         let pizzaImg: HTMLDivElement = document.getElementById("pizza") as HTMLDivElement;
         let omnomImg: HTMLDivElement = document.getElementById("omnombeere") as HTMLDivElement;
@@ -61,7 +46,8 @@ namespace pokimon {
         update();
     }
 
-    function go_out(): void {
+    export function go_out(): void {
+        console.log("go out");
         let carrots: number = 1 + Math.random() * 3;
         carrots = Math.round(carrots);
         let pizza: number = Math.random();
@@ -138,6 +124,5 @@ namespace pokimon {
             h.pokimon.update_mood();
             h.pokimon.update_img();
         }
-        console.log("update2");
     }
 }
